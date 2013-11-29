@@ -1,0 +1,20 @@
+#!/bin/bash
+# dhtled
+#
+# description: DHT monitoring and LED flashing
+
+DHTLED_HOME=/root/dhtled
+
+case $1 in
+    start)
+        /bin/bash $DHTLED_HOME/init/start.sh
+    ;;
+    stop)
+        /bin/bash $DHTLED_HOME/init/stop.sh
+    ;;
+    restart)
+        /bin/bash $DHTLED_HOME/init/stop..sh
+        /bin/bash $DHTLED_HOME/init/start.sh
+    ;;
+esac
+exit 0

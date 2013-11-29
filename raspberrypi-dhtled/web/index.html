@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>DHT</title>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/stock/highstock.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+		
+		<script>
+		var chart;
+
+		function requestData() {
+			$.ajax({
+	        		url: 'get-temp.php', success: function(response) {
+						chart.series[0].setData(response);
+	                },
+	                cache: false
+	                });
+			$.ajax({
+                    url: 'get-hum.php',
+                    success: function(response) {
+                    	chart.series[1].setData(response);
+                    },
+                    cache: false
+                    });
+			setTimeout(requestData, 20000);
+		}
+
+		Highcharts.setOptions({
+			global: {
+				useUTC: false
+			}
+		});
+
+		$(document).ready(function() {
+			chart = new Highcharts.StockChart({
+				chart: {
+					renderTo: container,
+					events: {
+	                    load: requestData()
+                        },
+					type: 'spline'
+				},
+				title: {
+					text: 'Temperature & Humidity'
+				},
+				credits: {
+					enabled: false
+				},
+				legend: {
+					enabled: true
+				},
+				yAxis: {
+					title: {
+						text: 'Value'
+					}
+				},
+				rangeSelector: {
+					buttons: [{
+						count: 60,
+						type: 'minute',
+						text: '1H'
+					}, {
+                        count: 480,
+                        type: 'minute',
+                        text: '8H'
+                    }, {
+						count: 1,
+						type: 'day',
+						text: '1D'
+					}, {
+                        count: 1,
+                        type: 'week',
+                        text: '1W'
+                    }, {
+						type: 'all',
+						text: 'All'
+					}],
+					inputEnabled: false,
+					selected: 4
+				},
+				series: [{
+					name: 'Temperature',
+					data: []
+				}, {
+					name: 'Humidity',
+					data: []
+				}]
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<div id="container" style="width: 1200px; height: 700px; margin: 0 auto"></div>
+	</body>
+</html>
