@@ -13,7 +13,7 @@ case $1 in
         /bin/bash $DHTLED_HOME/init/stop.sh
     ;;
     restart)
-        /bin/bash $DHTLED_HOME/init/stop..sh
+        /bin/bash $DHTLED_HOME/init/stop.sh
         /bin/bash $DHTLED_HOME/init/start.sh
     ;;
 esac
