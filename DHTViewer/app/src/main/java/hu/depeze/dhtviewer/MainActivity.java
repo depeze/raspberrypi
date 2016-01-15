@@ -107,7 +107,7 @@ public class MainActivity extends ActionBarActivity implements HTTPGetAsyncRespo
             humidityTextView.setText(resources.getString(R.string.humidity, humidityValue));
 
             handleConnectionOK();
-        } catch (JSONException ex) {
+        } catch (Exception ex) {
             Log.w(Constants.TAG, ex.getMessage());
             handleConnectionError();
         }
