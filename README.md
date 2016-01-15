@@ -12,5 +12,6 @@ The project also contains an index.html file which can show you these values wit
 Android application will show you the latest temperature and humidity values which are being collected by your Raspberry PI. It accesses the get-last-values.php file which returns those values in a simple JSON format.
 
 Screenshot:
+
 ![Android application screenshot](https://github.com/depeze/raspberrypi/blob/master/DHTViewer/RaspberryPI-DHTViewer-Screenshot.jpg)
 
